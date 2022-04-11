@@ -1,0 +1,39 @@
+word= "Hello World"
+print word
+
+#Accessing
+word= "Hello World"
+letter = word[0]
+print letter
+
+#length
+print len(word)
+
+
+#finding char count
+print word.count('l')
+
+#finding char
+print word.find("H")
+
+#finding index
+print word.index("World")
+
+#Replacing
+
+word = "Hello world"
+print word.replace("Hello", "Goodbye")
+
+
+
+#upperCase
+print word.upper()
+
+#Reversing
+
+string = "Hello world"
+print ' '.join(reversed(string))
+
+#join
+print ":".join(word)
+
