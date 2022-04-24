@@ -1,9 +1,6 @@
 arr=[]
-
 n=int(input("no of element"))
-
 for i in range(0,n):
-
     arr.append(int(input()))
 def mergeSort(arr):
     if len(arr)>1:
