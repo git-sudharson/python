@@ -1,3 +1,10 @@
+arr=[]
+
+n=int(input("no of element"))
+
+for i in range(0,n):
+
+    arr.append(int(input()))
 def mergeSort(arr):
     if len(arr)>1:
         a=len(arr)//2
@@ -25,10 +32,7 @@ def mergeSort(arr):
 def printList(arr):
     for i in range(len(arr)):
         print(arr[i])
-arr=[]
-n=int(input("no of element"))
-for i in range(0,n):
-    arr.append(int(input()))
+
 mergeSort(arr)
 print("Sorted array is ")
 printList(arr)
