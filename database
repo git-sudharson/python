@@ -1,0 +1,66 @@
+import sqlite3
+conn=sqlite3.connect('test.db')
+print("Opened databased successfully")
+conn.execute('''create table Company1
+             (Id int primary key not null,
+             name Text not null,
+             age int not null,
+             address  char(50),
+             salary Real)''')
+print("Table created successfully")
+conn.close()
+
+
+import sqlite3
+conn=sqlite3.connect('test.db')
+print("Opened database successfully")
+conn.execute("Insert into Company1(Id,name,age,address,salary) values(1,'Paul',32,'California',2000.00)")
+conn.execute("Insert into Company1(Id,name,age,address,salary) values(2,'henry',33,'berlin',3000.00)")
+conn.execute("Insert into Company1(Id,name,age,address,salary) values(3,'siraj',26,'tokyo',4000.00)")
+conn.commit()
+print("Records created successfully")
+conn.close()
+
+
+import sqlite3
+conn=sqlite3.connect('test.db')
+print("Opened database successfully")
+cursor=conn.execute("SELECT Id,name,age,address,salary from Company1")
+for row in cursor:
+    print "ID=",row[0]
+    print "NAME=",row[1]
+    print "ADDRESS=",row[3]
+    print "Salary=",row[4],"\n"
+print("Operation done successfully")
+conn.close()
+
+
+import sqlite3
+conn=sqlite3.connect('test.db')
+print("Opened database successfully")
+conn.execute("UPDATE Company1 set salary=25000.00 where Id=1")
+conn.commit()
+print "Total no of rows updated:",conn.total_changes
+cursor=conn.execute("SELECT Id,name,age,address,salary from Company1")
+for row in cursor:
+    print "ID=",row[0]
+    print "NAME=",row[1]
+    print "ADDRESS=",row[3]
+    print "Salary=",row[4],"\n"
+print("Operation done successfully")
+conn.close()
+
+
+import sqlite3
+conn=sqlite3.connect('test.db')
+print("Opened database successfully")
+conn.execute("DELETE from Company1 where Id=2")
+conn.commit()
+cursor=conn.execute("SELECT Id,name,age,address,salary from Company")
+for row in cursor:
+    print "ID=",row[0]
+    print "NAME=",row[1]
+    print "ADDRESS=",row[3]
+    print "Salary=",row[4],"\n"
+print("Operation done successfully")
+conn.close()
