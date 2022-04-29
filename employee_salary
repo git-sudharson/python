@@ -9,7 +9,7 @@ Gross Pay = Net Pay - PF.
 '''
 
 print("SALARY PROGRAM")
-name= str(input("Enter name of employee:"))
+name= raw_input("Enter name of employee:")
 basic=float(input("Enter Basic Salary :"))
 da=float(basic*0.25)
 hra=float(basic*0.15)
