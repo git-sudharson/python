@@ -1,0 +1,19 @@
+input_tuple=final_tuple=()
+falg=False
+n=int(input("Enter number of employees "))
+print("Enter the Employee name,id,and basic pay of ",n,"employees ")
+for i in range(0,n):
+    name=raw_input("Enter the name ")
+    id_no=input("Enter id ")
+    bpay=input("Enter basic pay ")
+    da=float(bpay*0.25)
+    hra=float(bpay*0.15)
+    pf=float(bpay*0.12)
+    ta=float(bpay*0.075)
+    gpay=float(bpay+da+hra+ta)
+    netpay=float(gpay-pf)
+    input_tuple=(name,id_no,bpay,da,hra,pf,ta,gpay,netpay,)
+    final_tuple=(final_tuple+(input_tuple),)
+for x in final_tuple:
+    print(final_tuple)
+    
