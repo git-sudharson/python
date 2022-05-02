@@ -10,17 +10,16 @@ for i in range(0,n):
     hra=float(bpay*0.15)
     pf=float(bpay*0.12)
     ta=float(bpay*0.075)
-    gpay=float(bpay+da+hra+ta)
-    netpay=float(gpay-pf)
+    gpay=bpay+da+hra+ta
+    netpay=gpay-pf
     input_tuple=(id_no,name,bpay,da,hra,pf,ta,gpay,netpay,)
-    final_tuple=(final_tuple+(input_tuple),)
+    final_tuple=final_tuple+(input_tuple,)
 print("\n")
 print("id\tname\tbpay\tda\thra\tpf\tta\tgpay\tnetpay ")
 for x in final_tuple:
-    flag=True
-    print x[0],"\t",x[1],"\t",x[2],"\t",x[3],"\t",x[4],"\t",x[5],"\t",x[6],"\t",x[7],"\t",x[8],"\n"
-if flag=False:
+        flag=True
+        print x[0],"\t",x[1],"\t",x[2],"\t",x[3],"\t",x[4],"\t",x[5],"\t",x[6],"\t",x[7],"\t",x[8]
+if flag==False:
     print "The record not found "
     
     
-
