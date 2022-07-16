@@ -1,0 +1,41 @@
+from tkinter import *
+
+root=Tk()
+root.geometry("500x500")
+
+
+
+def isCheck():
+        return Label(root, text='addition in c \n subtraction in c \n multiplication in c ').pack()
+def show():
+	label2.config( text = clicked.get() )
+	
+    
+
+l1 = Label(root,text="MAXVY ",fg="orange")
+l1.place(x=270,y=10,anchor="center")
+
+options = [
+	"addition in c",
+	"subtraction in c",
+	"multiplication in c",
+	]
+clicked = StringVar()
+clicked.set( "Select files" )
+drop = OptionMenu( root , clicked , *options )
+
+checkme = Checkbutton(root, text='Run All',command = isCheck)
+
+
+button = Button( root , text = "run" , command = show )
+
+
+label2 = Label( root , text = " " )
+
+
+
+l1.pack()
+drop.pack()
+checkme.pack()
+button.pack()
+label2.pack()
