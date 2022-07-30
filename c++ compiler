@@ -1,0 +1,52 @@
+from tkinter import *
+from functools import partial
+import os
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog, messagebox, ttk
+
+
+
+main = Tk()
+main.title("Multiple Choice Listbox")
+main.geometry('400x400')
+#frame = ttk.Frame(main, padding=(3, 3, 12, 12))
+#frame.grid(column=0, row=0, sticky=(N, S, E, W))
+
+
+
+folder = os.path.realpath('D:\maxvy')
+filelist = [fname for fname in os.listdir(folder)]
+valores = StringVar()
+valores.set(filelist)
+
+l1 = Label(main,text="MAXVY ",fg="orange")
+l1.place(x=270,y=10,anchor="center")
+l1.pack()
+
+lstbox = Listbox(main, listvariable=valores, selectmode=MULTIPLE, width=20, height=10)
+#lstbox.grid(column=0, row=0, columnspan=2)
+lstbox.pack()
+
+def select():
+    reslist = list()
+    seleccion = lstbox.curselection()
+    for i in seleccion:
+        entrada = lstbox.get(i)
+        reslist.append(entrada)
+        label2.config( text = reslist)
+        
+    for val in reslist:
+        print(val)
+    
+
+btn = ttk.Button(main, text="Run", command=select)
+#btn.grid(column=1, row=1)
+btn.pack()
+#T = Text(root, height = 5, width = 52)
+#T.pack()
+label2 = Label(main)
+label2.pack()
+
+
+main.mainloop()
