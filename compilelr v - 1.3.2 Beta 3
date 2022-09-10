@@ -1,0 +1,172 @@
+from tkinter import *
+from PIL import ImageTk,Image
+from functools import partial
+import os,fnmatch
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog, messagebox, ttk
+import subprocess,glob
+
+def select():
+    if check1.get()==0:
+        reslist = list()
+        returns1=list()
+        selection = lstbox.curselection()
+        for i in selection:
+            entrada = lstbox.get(i)
+            folder1=os.path.splitext(entrada)[0]
+            reslist.append(folder1)
+            
+            returned_text = subprocess.check_output("g++ "+ folder1 +".cpp -o "+folder1+".exe", shell=True, universal_newlines=True)
+            returned_text2 = subprocess.check_output(folder1+".exe", shell=True, universal_newlines=True)
+            t1.config(state='normal')
+            t1.insert(tk.END,returned_text2)
+            t1.insert(tk.END,"\n        -------------------------------------x-------------------------x----------------------------------------------\n")
+            t1.config(state='disabled')
+    elif check1.get()==1:
+        files=list(filelist)
+        for i in files:
+            fold=os.path.splitext(i)[0]
+            
+            returned_text3= subprocess.check_output("g++ "+ fold +".cpp -o "+fold+".exe", shell=True, universal_newlines=True)
+            returned_text4 = subprocess.check_output(fold+".exe", shell=True, universal_newlines=True)
+            
+            t1.config(state='normal')
+            t1.insert(tk.END,returned_text4)
+            t1.insert(tk.END,"\n        -------------------------------------x-------------------------x----------------------------------------------\n")
+            t1.config(state='disabled')
+    
+        
+   
+def isCheck():  
+    if check1.get()==1:
+        lstbox.config(state=DISABLED)
+    elif check1.get()==0:
+        lstbox.config(state=NORMAL)
+#def clear_output():
+#    t1.config(state='normal')
+#    t1.delete("1.0","end")
+
+def clear_frame():
+
+    #for remove the exe file
+    pattern=(r"*.exe")
+    files2=glob.glob(pattern)
+    for file21 in files2:
+        os.remove(file21)
+    #for unselect the checkbox
+    checkme.deselect()
+    lstbox.config(state=NORMAL)
+
+    #for unselect the items in listbox
+    lstbox.selection_clear(0,'end')
+
+    #for clear output
+    t1.config(state='normal')
+    t1.delete("1.0","end")
+
+
+def quit_window():
+    master.destroy()
+    pattern=(r"*.exe")
+    files2=glob.glob(pattern)
+    for file21 in files2:
+        os.remove(file21)
+
+
+master = tk.Tk()
+#frame = tk.Frame(master)
+
+
+
+master.title("GUI Application")
+#master.resizable(0,0)
+master.iconbitmap('logo.ico')
+#frame = Frame(master,bg="blue", bd=5, relief=RAISED)
+#master.attributes('-fullscreen', True)
+'''width= master.winfo_screenwidth()
+width=width-250
+height= master.winfo_screenheight()
+height=height-130 
+#setting tkinter window size
+master.geometry("%dx%d" % (width, height))'''
+#master.geometry("500x500")
+
+#frame.place("%dx%d" % (width, height))
+#master.state('zoomed')
+
+# resize image
+logo = Image.open("maxvylogo.png")
+#resized = logo.resize((180, 40), Image.Resampling.LANCZOS)
+resized = logo.resize((250, 40), Image.Resampling.LANCZOS)
+newlogo = ImageTk.PhotoImage(resized)
+
+
+l1 = Label(master, image= newlogo)
+#l1.place(x=550, y=5)
+l1.grid(row=0,column=0,columnspan=3, sticky=(W,N,E,S))
+
+folder = os.path.realpath(r".")
+#for filter the exe file
+filelist = [fname for fname in fnmatch.filter(os.listdir('.'),'*.cpp')]
+valores = StringVar()
+valores.set(filelist)
+
+
+t1=tk.Text(master,font="arial 12")#width= 75, height=26,
+#t1.place(x=420, y=100)
+
+t1.grid(row=2,column=1,sticky=(W,E,N), pady=5, padx=7)
+l3 = Label(master)
+
+l4=Label(master)
+'''l5=Label(master)#for last column spacing
+l5.grid(row=1, column=4)
+l6=Label(master)#for last row spacing
+l6.grid(row=5, column=5)'''
+
+
+lstbox =Listbox(master, listvariable=valores, selectmode=MULTIPLE,height=20,width=28, font="arial 12")#'''  '''
+#lstbox.place(x=25,y=100)
+lstbox.grid(row=2, column=0,sticky=(W,N,E))
+
+check1=IntVar()
+checkme = Checkbutton(master, text='Run All',font="arial 10",variable=check1,command = isCheck,onvalue=1,offvalue=0)
+#checkme.place(x=22,y=500)
+checkme.grid(row=3, column=0,sticky=(N),pady=5, padx=4)
+
+
+
+btn = ttk.Button(master, text="Run", command=select)
+#btn.place(x=25,y=530)
+btn.grid(row=4, column=0,sticky=(N),pady= 5,padx=4)
+#clear_btn = ttk.Button(master, text="clear", command = clear_output)
+#clear_btn.place(x=1190, y=560)
+
+refresh_btn = ttk.Button(master,text = "Refresh", command = clear_frame)
+#refresh_btn.place(x=1190, y=560)
+#refresh_btn.grid(row=3, column=2, columnspan=4)
+refresh_btn.grid(row=3, column=1 ,sticky=(W,N), pady=5)
+quit_btn = ttk.Button(master, text="Quit", command = quit_window)
+#quit_btn.place(x=1080, y=560)
+#quit_btn.grid(row=1, column=1, columnspan=2)
+#quit_btn.grid(row=3, column=2, columnspan=4)
+quit_btn.grid(row=3, column=1, sticky=(E,N),pady=5)
+
+
+#master.grid_rowconfigure(0, weight=1)
+master.grid_rowconfigure(1, weight=1)
+master.grid_rowconfigure(2, weight=1)
+#master.grid_rowconfigure(3, weight=1)
+#master.grid_rowconfigure(4, weight=1)
+#master.grid_rowconfigure(5, weight=2)
+
+#master.grid_columnconfigure(0, weight=1)
+master.grid_columnconfigure(1, weight=1)
+#master.grid_columnconfigure(2, weight=1)
+#master.grid_columnconfigure(3, weight=1)
+#master.grid_columnconfigure(4, weight=2)
+
+
+
+master.mainloop()
