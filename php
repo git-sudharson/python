@@ -15,6 +15,34 @@ km
 fviz_cluster(km,data = df)
 
 
+NCR--------------------------------------------------------------------------------------------------
+
+factorial<-function(val)
+{
+  fact=1
+  if(val<0){
+    return(0)
+  }else if(val==0){
+    return(1)
+  }else{
+    for(i in 1:val){
+      fact=fact*i
+    }
+    return(fact)
+  }
+}
+n<-as.integer(readline(prompt = "enter n value"))
+r<-as.integer(readline(prompt = "enter r value"))
+c=n-r
+nfact=factorial(n)
+rfact=factorial(r)
+nrfact=factorial(c)
+ans=nfact/(rfact*nrfact)
+print("ncr value is")
+print(ans)
+
+
+
 binary--------------------------------------------------------------------------------------------------------
 
 bisearch = function(table,key){
